@@ -19,6 +19,17 @@ body {
 	padding: 10px;
 	border-radius: 10px;
 }
+.addText {
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+}
+.addInput {
+	width: 70%;
+	height: 2rem;
+	border-radius: 10px;
+	font-size: 24px;
+}
 .modal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */

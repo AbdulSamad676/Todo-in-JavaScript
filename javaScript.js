@@ -1,4 +1,13 @@
 const todos = ['Ali', 'Ahmad', 'Ayan'];
+let form = document.querySelector('form');
+form.addEventListener('submit', function (e) {
+	e.preventDefault();
+	const formData = new FormData(event.target);
+
+	let inputData = formData.get('inputText');
+	console.log(inputData);
+});
+
 const list = document.querySelector('.todoList');
 function display() {
 	todos.map(todo => {
@@ -8,7 +17,7 @@ function display() {
 		li.style.fontSize = '24px';
 		li.className = 'list-item';
 		li.appendChild(document.createTextNode(todo));
-		console.log(li);
+		// console.log(li);
 		list.appendChild(li);
 	});
 }
