@@ -18,6 +18,7 @@ body {
 	margin: 10px;
 	padding: 10px;
 	border-radius: 10px;
+	position: relative;
 }
 .addText {
 	width: 100%;
@@ -30,6 +31,15 @@ body {
 	border-radius: 10px;
 	font-size: 24px;
 }
+
+/* Style the close button */
+.close {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 10px;
+}
+
 .modal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */

@@ -15,17 +15,26 @@ form.addEventListener('submit', function (e) {
 
 const list = document.querySelector('.todoList');
 
+// add close button to all elements
+
 //Display Function
 function display() {
 	// CLear the Existing List
 	list.innerHTML = '';
 	todos.forEach(todo => {
 		const li = document.createElement('li');
+		const span = document.createElement('span');
+		//
+		let txt = document.createTextNode('\u00D7');
+		span.className = 'close';
+		span.appendChild(txt);
+
 		li.style.backgroundColor = 'white';
 		li.style.color = 'black';
 		li.style.fontSize = '24px';
 		li.className = 'list-item';
 		li.appendChild(document.createTextNode(todo));
+		li.appendChild(span);
 		list.appendChild(li);
 	});
 }
