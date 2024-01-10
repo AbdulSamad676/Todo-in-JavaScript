@@ -121,7 +121,7 @@ function updateTodo(editId) {
 		if (todos[editId] !== undefined) {
 			todos[editId] = updateData;
 			// clear update filed
-			updateField = '';
+			updateField.value = '';
 		}
 
 		// Display the updated todos
