@@ -106,16 +106,29 @@ function editTodo() {
 	// edit functionality End
 }
 
+// Update funcitonality
 function updateTodo(editId) {
-	// console.log(`edited element id: ${editId}`);
 	let updateForm = document.querySelector('.updateForm');
-	console.log(updateForm);
+
 	updateForm.addEventListener('submit', function (e) {
 		e.preventDefault();
-		//
-		let updateField = document.getElementById('inputText');
-		const formData = new FormData(e.target);
-		let updateData = formData.get('updateText');
-		console.log(`updateData is : ${updateData}`);
+
+		let updateField = document.getElementById('updateText');
+		const updateFormData = new FormData(e.target);
+		let updateData = updateFormData.get('updateText');
+
+		// Update the todo at the specified index (editId)
+		if (todos[editId] !== undefined) {
+			todos[editId] = updateData;
+			// clear update filed
+			updateField = '';
+		}
+
+		// Display the updated todos
+		display();
+
+		// Close the modal
+		var modal = document.getElementById('myModal');
+		modal.style.display = 'none';
 	});
 }
