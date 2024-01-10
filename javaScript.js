@@ -23,19 +23,27 @@ function display() {
 	list.innerHTML = '';
 	todos.forEach(todo => {
 		const li = document.createElement('li');
-		const span = document.createElement('span');
-		// close sign to each list
+
+		// edit sign to each
+		const editSpan = document.createElement('span');
+		editSpan.className = 'editBtn';
+		editSpan.innerHTML = '&#9998;';
+		// delete sign to each list
+		const deleteSpan = document.createElement('span');
 		let txt = document.createTextNode('\u00D7');
-		span.className = 'closeBtn';
-		span.appendChild(txt);
+		deleteSpan.className = 'closeBtn';
+		deleteSpan.appendChild(txt);
 		// adding list item to the todos list
 		li.style.backgroundColor = 'white';
 		li.style.color = 'black';
 		li.style.fontSize = '24px';
 		li.className = 'list-item';
 		li.appendChild(document.createTextNode(todo));
-		li.appendChild(span);
+		li.appendChild(editSpan);
+		li.appendChild(deleteSpan);
+
 		list.appendChild(li);
+		// console.log(li);
 	});
 	removeTodo();
 }

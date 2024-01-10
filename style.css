@@ -19,6 +19,8 @@ body {
 	padding: 0px;
 }
 .list-item {
+	display: flex;
+	align-items: center;
 	margin: 10px;
 	padding: 10px;
 	border-radius: 10px;
@@ -55,8 +57,17 @@ body {
 	top: 0;
 	padding: 10px;
 	cursor: pointer;
+	color: red;
 }
-
+.editBtn {
+	position: absolute;
+	right: 10%;
+	top: 0;
+	font-size: 18px;
+	padding: 10px;
+	cursor: pointer;
+	color: green;
+}
 .modal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
