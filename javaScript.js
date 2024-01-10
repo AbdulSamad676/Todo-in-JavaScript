@@ -1,5 +1,5 @@
 let todos = ['Ali', 'Ahmad', 'Ayan'];
-let form = document.querySelector('form');
+let form = document.querySelector('.addText');
 // list-items parent
 const list = document.querySelector('.todoList');
 
@@ -21,7 +21,7 @@ form.addEventListener('submit', function (e) {
 function display() {
 	// CLear the Existing List
 	list.innerHTML = '';
-	todos.forEach(todo => {
+	todos.forEach((todo, index) => {
 		const li = document.createElement('li');
 
 		// edit sign to each
@@ -39,6 +39,7 @@ function display() {
 		li.style.color = 'black';
 		li.style.fontSize = '24px';
 		li.className = 'list-item';
+		li.id = index;
 		li.appendChild(document.createTextNode(todo));
 		li.appendChild(editSpan);
 		li.appendChild(deleteSpan);
@@ -61,9 +62,9 @@ function removeTodo() {
 		item.onclick = function () {
 			let parent = this.parentElement;
 			parent.style.display = 'none';
-			console.log(todos);
+			// console.log(todos);
 			let p = this.parentElement.firstChild.data;
-			console.log(this.parentElement.firstChild.data);
+			// console.log(this.parentElement.firstChild.data);
 			let remP = todos.filter(elem => {
 				return elem === p;
 			});
@@ -72,65 +73,6 @@ function removeTodo() {
 	});
 }
 
-// add close button to all elements
-
-// let closeButtons = document.querySelectorAll('.closeBtn');
-// closeButtons.forEach(item => {
-// 	console.log(item.parentElement.firstChild.data);
-// 	// console.log(todos);
-// 	item.onclick = function () {
-// 		let parent = this.parentElement;
-// 		parent.style.display = 'none';
-// 		console.log(todos);
-// 		let p = this.parentElement.firstChild.data;
-// 		console.log(this.parentElement.firstChild.data);
-// 		let remP = todos.filter(elem => {
-// 			return elem === p;
-// 		});
-// 		todos.splice(remP, 1);
-// 	};
-// });
-// // Get the modal
-// var modal = document.getElementById('myModal');
-
-// // Get the button that opens the modal
-// // var btn = document.getElementById('myBtn');
-// let editbtns = document.querySelectorAll('.editBtn');
-// console.log(`Edit buttons : ${Array.from(editbtns)}`);
-// // Get the <span> element that closes the modal
-// editbtns.forEach(btn => {
-// 	btn.addEventListener('click', function () {
-// 		var span = document.getElementsByClassName('close')[0];
-// 		modal.style.display = 'block';
-// 		span.onclick = function () {
-// 			modal.style.display = 'none';
-// 		};
-// 		window.onclick = function (event) {
-// 			if (event.target == modal) {
-// 				modal.style.display = 'none';
-// 			}
-// 		};
-// 	});
-// });
-
-// var span = document.getElementsByClassName('close')[0];
-
-// When the user clicks the button, open the modal
-// btn.onclick = function () {
-// 	modal.style.display = 'block';
-// };
-
-// When the user clicks on <span> (x), close the modal
-// span.onclick = function () {
-// 	modal.style.display = 'none';
-// };
-
-// When the user clicks anywhere outside of the modal, close it
-// window.onclick = function (event) {
-// 	if (event.target == modal) {
-// 		modal.style.display = 'none';
-// 	}
-// };
 function editTodo() {
 	// Edit functionality
 	// Get the modal
@@ -139,11 +81,13 @@ function editTodo() {
 	// Get the button that opens the modal
 	// var btn = document.getElementById('myBtn');
 	let editbtns = document.querySelectorAll('.editBtn');
-	console.log(editbtns);
+	// console.log(editbtns);
 	// Get the <span> element that closes the modal
 	let myedit = Array.from(editbtns);
 	myedit.forEach(btn => {
-		btn.addEventListener('click', function () {
+		btn.addEventListener('click', function (e) {
+			console.log(e.target.parentElement.id);
+
 			var span = document.getElementsByClassName('close')[0];
 			modal.style.display = 'block';
 			span.onclick = function () {

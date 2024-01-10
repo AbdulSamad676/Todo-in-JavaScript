@@ -33,6 +33,14 @@ body {
 	justify-content: space-evenly;
 	padding: 10px;
 }
+.updateForm {
+	/* .addText { */
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	padding: 10px;
+}
 .addInput {
 	width: 100%;
 	margin-right: 5px;
@@ -84,11 +92,12 @@ body {
 
 /* Modal Content */
 .modal-content {
+	color: black;
 	background-color: #fefefe;
 	margin: auto;
 	padding: 20px;
 	border: 1px solid #888;
-	width: 80%;
+	width: max-content;
 }
 
 /* The Close Button */
