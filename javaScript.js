@@ -87,7 +87,9 @@ function editTodo() {
 	myedit.forEach(btn => {
 		btn.addEventListener('click', function (e) {
 			console.log(e.target.parentElement.id);
-
+			let id = e.target.parentElement.id;
+			console.log(todos);
+			updateTodo(id);
 			var span = document.getElementsByClassName('close')[0];
 			modal.style.display = 'block';
 			span.onclick = function () {
@@ -102,4 +104,18 @@ function editTodo() {
 	});
 
 	// edit functionality End
+}
+
+function updateTodo(editId) {
+	// console.log(`edited element id: ${editId}`);
+	let updateForm = document.querySelector('.updateForm');
+	console.log(updateForm);
+	updateForm.addEventListener('submit', function (e) {
+		e.preventDefault();
+		//
+		let updateField = document.getElementById('inputText');
+		const formData = new FormData(e.target);
+		let updateData = formData.get('updateText');
+		console.log(`updateData is : ${updateData}`);
+	});
 }
