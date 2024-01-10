@@ -33,7 +33,7 @@ body {
 }
 
 /* Style the close button */
-.close {
+.closeBtn {
 	position: absolute;
 	right: 0;
 	top: 0;

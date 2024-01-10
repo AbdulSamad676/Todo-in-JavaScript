@@ -1,5 +1,9 @@
 let todos = ['Ali', 'Ahmad', 'Ayan'];
 let form = document.querySelector('form');
+// list-items parent
+const list = document.querySelector('.todoList');
+
+// Add todo
 form.addEventListener('submit', function (e) {
 	e.preventDefault();
 	//
@@ -13,10 +17,6 @@ form.addEventListener('submit', function (e) {
 	display();
 });
 
-const list = document.querySelector('.todoList');
-
-// add close button to all elements
-
 //Display Function
 function display() {
 	// CLear the Existing List
@@ -24,11 +24,11 @@ function display() {
 	todos.forEach(todo => {
 		const li = document.createElement('li');
 		const span = document.createElement('span');
-		//
+		// close sign to each list
 		let txt = document.createTextNode('\u00D7');
-		span.className = 'close';
+		span.className = 'closeBtn';
 		span.appendChild(txt);
-
+		// adding list item to the todos list
 		li.style.backgroundColor = 'white';
 		li.style.color = 'black';
 		li.style.fontSize = '24px';
@@ -37,9 +37,49 @@ function display() {
 		li.appendChild(span);
 		list.appendChild(li);
 	});
+	removeTodo();
 }
+
 display();
 //
+
+function removeTodo() {
+	let closeButtons = document.querySelectorAll('.closeBtn');
+	closeButtons.forEach(item => {
+		console.log(item.parentElement.firstChild.data);
+		// console.log(todos);
+		item.onclick = function () {
+			let parent = this.parentElement;
+			parent.style.display = 'none';
+			console.log(todos);
+			let p = this.parentElement.firstChild.data;
+			console.log(this.parentElement.firstChild.data);
+			let remP = todos.filter(elem => {
+				return elem === p;
+			});
+			todos.splice(remP, 1);
+		};
+	});
+}
+
+// add close button to all elements
+
+// let closeButtons = document.querySelectorAll('.closeBtn');
+// closeButtons.forEach(item => {
+// 	console.log(item.parentElement.firstChild.data);
+// 	// console.log(todos);
+// 	item.onclick = function () {
+// 		let parent = this.parentElement;
+// 		parent.style.display = 'none';
+// 		console.log(todos);
+// 		let p = this.parentElement.firstChild.data;
+// 		console.log(this.parentElement.firstChild.data);
+// 		let remP = todos.filter(elem => {
+// 			return elem === p;
+// 		});
+// 		todos.splice(remP, 1);
+// 	};
+// });
 // Get the modal
 var modal = document.getElementById('myModal');
 
