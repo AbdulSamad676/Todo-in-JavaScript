@@ -1,28 +1,35 @@
-const todos = ['Ali', 'Ahmad', 'Ayan'];
+let todos = ['Ali', 'Ahmad', 'Ayan'];
 let form = document.querySelector('form');
 form.addEventListener('submit', function (e) {
 	e.preventDefault();
-	const formData = new FormData(event.target);
-
+	//
+	let inputField = document.getElementById('inputText');
+	const formData = new FormData(e.target);
 	let inputData = formData.get('inputText');
-	console.log(inputData);
+	todos.push(inputData);
+	// Reset the Input Field
+	inputField.value = '';
+	// Display Updated Todo
+	display();
 });
 
 const list = document.querySelector('.todoList');
+
+//Display Function
 function display() {
-	todos.map(todo => {
+	// CLear the Existing List
+	list.innerHTML = '';
+	todos.forEach(todo => {
 		const li = document.createElement('li');
 		li.style.backgroundColor = 'white';
 		li.style.color = 'black';
 		li.style.fontSize = '24px';
 		li.className = 'list-item';
 		li.appendChild(document.createTextNode(todo));
-		// console.log(li);
 		list.appendChild(li);
 	});
 }
 display();
-
 //
 // Get the modal
 var modal = document.getElementById('myModal');
