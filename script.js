@@ -17,7 +17,7 @@ form.addEventListener('submit', function (e) {
 	display();
 });
 
-//Display Function
+// Display Function
 function display() {
 	// CLear the Existing List
 	list.innerHTML = '';
@@ -65,13 +65,47 @@ function removeTodo() {
 			// console.log(todos);
 			let p = this.parentElement.firstChild.data;
 			// console.log(this.parentElement.firstChild.data);
-			let remP = todos.filter(elem => {
+			let remP = todos.findIndex(elem => {
 				return elem === p;
 			});
 			todos.splice(remP, 1);
+			display(); // Display the updated list after removal
 		};
 	});
 }
+
+// function editTodo() {
+// 	// Edit functionality
+// 	// Get the modal
+// 	var modal = document.getElementById('myModal');
+
+// 	// Get the button that opens the modal
+// 	// var btn = document.getElementById('myBtn');
+// 	let editbtns = document.querySelectorAll('.editBtn');
+// 	// console.log(editbtns);
+// 	// Get the <span> element that closes the modal
+// 	let myedit = Array.from(editbtns);
+// 	myedit.forEach(btn => {
+// 		btn.addEventListener('click', function (e) {
+// 			console.log(e.target.parentElement.id);
+// 			let id = e.target.parentElement.id;
+// 			console.log(todos);
+// 			updateTodo(id);
+// 			var span = document.getElementsByClassName('close')[0];
+// 			modal.style.display = 'block';
+// 			span.onclick = function () {
+// 				modal.style.display = 'none';
+// 			};
+// 			window.onclick = function (event) {
+// 				if (event.target == modal) {
+// 					modal.style.display = 'none';
+// 				}
+// 			};
+// 		});
+// 	});
+
+// Initialize updateFormSubmitHandler
+let updateFormSubmitHandler;
 
 function editTodo() {
 	// Edit functionality
@@ -89,7 +123,41 @@ function editTodo() {
 			console.log(e.target.parentElement.id);
 			let id = e.target.parentElement.id;
 			console.log(todos);
-			updateTodo(id);
+
+			// Move updateForm declaration to the outer scope
+			let updateForm = document.querySelector('.updateForm');
+
+			// Remove existing event listener
+			updateForm.removeEventListener('submit', updateFormSubmitHandler);
+
+			// Add event listener for this instance
+			updateFormSubmitHandler = function (e) {
+				e.preventDefault();
+
+				let updateField = document.getElementById('updateText');
+
+				const updateFormData = new FormData(e.target);
+				let updateData = updateFormData.get('updateText');
+
+				// Ensure the editId is a valid index
+				if (id >= 0 && id < todos.length) {
+					// Update the todo at the specified index (id)
+					todos[id] = updateData;
+
+					// Display the updated todos
+					display();
+					updateField.value = '';
+				} else {
+					console.error('Invalid id:', id);
+				}
+
+				// Close the modal
+				var modal = document.getElementById('myModal');
+				modal.style.display = 'none';
+			};
+
+			updateForm.addEventListener('submit', updateFormSubmitHandler);
+
 			var span = document.getElementsByClassName('close')[0];
 			modal.style.display = 'block';
 			span.onclick = function () {
@@ -106,7 +174,37 @@ function editTodo() {
 	// edit functionality End
 }
 
-// Update funcitonality
+// rest of your existing code...
+
+// 	// edit functionality End
+// }
+
+// Update functionality
+// function updateTodo(editId) {
+// 	let updateForm = document.querySelector('.updateForm');
+
+// 	updateForm.addEventListener('submit', function (e) {
+// 		e.preventDefault();
+
+// 		let updateField = document.getElementById('updateText');
+
+// 		const updateFormData = new FormData(e.target);
+// 		let updateData = updateFormData.get('updateText');
+
+// 		// Update the todo at the specified index (editId)
+// 		if (todos[editId] !== undefined) {
+// 			todos[editId] = updateData;
+// 			// Display the updated todos
+// 			display();
+// 			updateField.value = '';
+// 		}
+
+// 		// Close the modal
+// 		var modal = document.getElementById('myModal');
+// 		modal.style.display = 'none';
+// 	});
+// }
+
 function updateTodo(editId) {
 	let updateForm = document.querySelector('.updateForm');
 
@@ -114,18 +212,21 @@ function updateTodo(editId) {
 		e.preventDefault();
 
 		let updateField = document.getElementById('updateText');
+
 		const updateFormData = new FormData(e.target);
 		let updateData = updateFormData.get('updateText');
 
-		// Update the todo at the specified index (editId)
-		if (todos[editId] !== undefined) {
+		// Ensure the editId is a valid index
+		if (editId >= 0 && editId < todos.length) {
+			// Update the todo at the specified index (editId)
 			todos[editId] = updateData;
-			// clear update filed
-			updateField.value = '';
-		}
 
-		// Display the updated todos
-		display();
+			// Display the updated todos
+			display();
+			updateField.value = '';
+		} else {
+			console.error('Invalid editId:', editId);
+		}
 
 		// Close the modal
 		var modal = document.getElementById('myModal');
